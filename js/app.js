@@ -1,7 +1,6 @@
 import Player from "./Player.js";
 import Board from "./Board.js";
 import GameManager from "./GameManager.js";
-import player from "./Player.js";
 
 //HTML Elements
 const gameBoardContainer = document.getElementById("gameBoardContainer");
@@ -53,7 +52,9 @@ restartGameBtn.addEventListener("click", function(){
   boardBlocks.forEach(block => {
     block.innerHTML = "";
   })
-  game.currentTurn = player1;
+  //Wonky but this setting ensures that player X starts the game.
+  game.currentTurn = player2;
+
   playerStatsContainer.appendChild(displayPlayerTurn);
   updateStats();
 })
@@ -70,6 +71,7 @@ function updateStats() {
       displayWinner.innerHTML = `Player ${player2.playerIdent} WINS!`
       playerStatsContainer.appendChild(displayWinner);
     }
+
     playerStatsContainer.removeChild(displayPlayerTurn);
   } else if (game.checkTieGame(board.GAME_BOARD)) {
     displayWinner.innerHTML = `Nobody WINS! How Sad...`
